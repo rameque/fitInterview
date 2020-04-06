@@ -18,7 +18,7 @@ class SearchComponent extends Component {
 
     componentDidMount() {
         
-        fetch(this.props.urlPath)
+        fetch(this.props.url)
         .then(res => res.json())
         .then(
             (result) => {
