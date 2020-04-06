@@ -12,6 +12,7 @@ class SearchComponent extends Component {
         this.state = {
             error: null,
             isLoaded: false,
+            data: [],
             items: []
           };
     }
@@ -24,7 +25,7 @@ class SearchComponent extends Component {
             (result) => {
                 this.setState({
                     isLoaded: true,
-                    items: result
+                    data: result
                 });
             },
             // Note: it's important to handle errors here
@@ -48,9 +49,9 @@ class SearchComponent extends Component {
                     Maximum Combat Points
                 </small>
             </label>
-            <input type="text" className="input" onKeyUp={(evt) => this.filterElementByValue(evt)}placeholder="Pokemon or type" />
+            <input type="text" className="input" onKeyUp={(evt) => this.filterElementByValue(evt.target.value)}placeholder="Pokemon or type" />
             {this.renderLoader()}
-            <ItemIterator results={this.filteredItems}></ItemIterator>
+            <ItemIterator results={this.state.items}></ItemIterator>
         </>
         );
     }
@@ -60,9 +61,17 @@ class SearchComponent extends Component {
         return (this.state.isLoaded) ? null : <div className="loader" ></div>;
     }
 
-    filterElementByValue (evt) {
-        console.log('evt: ', evt)
-        this.filteredItems = [];//this.props.items.filter()
+    filterElementByValue (value) {
+        
+        let filteredItems = this.state.data.filter(function (item) {
+            return  (item.Name.indexOf(value) !== -1);
+          });
+
+          console.log(filteredItems.length);
+        
+        this.setState({
+            items: filteredItems
+        });
     }
 
 }
