@@ -25,7 +25,7 @@ class ItemIterator extends Component {
                 <img src="http://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png" alt="" />
                 <div className="info">
                     <h1>
-                    <span className="hl">{}</span>{}</h1>
+                    <span className="hl">{item.Name}</span>{}</h1>
                     <span className="type electric">Electric</span>
                     <span className="type normal">Normal</span>
                 </div>

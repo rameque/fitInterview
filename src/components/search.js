@@ -62,15 +62,24 @@ class SearchComponent extends Component {
     }
 
     filterElementByValue (value) {
-        
-        let filteredItems = this.state.data.filter(function (item) {
-            return  (item.Name.indexOf(value) !== -1);
-          });
 
-          console.log(filteredItems.length);
-        
+        let k = 0;
+        let filteredItemsByName = [];
+
+        if(value.length >= 2) {
+            filteredItemsByName = this.state.data.filter((item) => {
+                if(item.Name.indexOf(value) !== -1 && k <= 4){ 
+                    ++k;
+                } else if (item.Types.indexOf(value)) {
+                    ++k;
+                }
+
+                return  (k <= 4 && (item.Name.indexOf(value) || item.Types.indexOf(value)));
+            });
+        }
+
         this.setState({
-            items: filteredItems
+            items: filteredItemsByName
         });
     }
 
