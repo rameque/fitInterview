@@ -4,6 +4,8 @@ import ItemIterator from './itemIIterator';
 
 class SearchComponent extends Component {
 
+    filteredItems = [];
+
     constructor(props) {
         super(props)
 
@@ -46,7 +48,7 @@ class SearchComponent extends Component {
                     Maximum Combat Points
                 </small>
             </label>
-            <input type="text" className="input" onKeyUp={this.filterElementByValue}placeholder="Pokemon or type" />
+            <input type="text" className="input" onKeyUp={(evt) => this.filterElementByValue(evt)}placeholder="Pokemon or type" />
             {this.renderLoader()}
             <ItemIterator results={this.filteredItems}></ItemIterator>
         </>
@@ -58,9 +60,9 @@ class SearchComponent extends Component {
         return (this.state.isLoaded) ? null : <div className="loader" ></div>;
     }
 
-    filterElementByValue () {
-        
-        this.filteredItems = this.props.items.filter()
+    filterElementByValue (evt) {
+        console.log('evt: ', evt)
+        this.filteredItems = [];//this.props.items.filter()
     }
 
 }
